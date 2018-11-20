@@ -69,9 +69,11 @@ if(ptr==NULL)
         return NULL;
 if(ptr->data==key)
         return ptr;
+pre=ptr;
 found=search(ptr->lc,key);
 if(found!=NULL)
         return found;
+pre=ptr;
 found=search(ptr->rc,key);
 if(found!=NULL)
         return found;
@@ -79,21 +81,20 @@ return NULL;
 }
 struct node* psearch(struct node*ptr,int key)
 {
-struct node*found=NULL;
-if(ptr==root)
-        return NULL;
-if(ptr==NULL)
-        return NULL;
-if(ptr->data==key)
-        return NULL;
-if(ptr->lc->data==key)
-        return ptr;
-if(ptr->rc->data==key)
-        return ptr;
-  if (((found=psearch(root->lc, key))!=NULL) || ((found=psearch(root->rc, key) )!=NULL))
-  {
-    return found;
-  }
+        struct node*found=NULL;
+        if(ptr==NULL)
+                return NULL;
+        if(ptr->data==key)
+                return NULL;
+        if((ptr->lc!=NULL)&&(ptr->lc->data==key))
+                return ptr;
+        if((ptr->rc!=NULL)&&(ptr->rc->data==key))
+                return ptr;
+        if (((found=psearch(ptr->lc, key))!=NULL) || ((found=psearch(ptr->rc, key) )!=NULL))
+        {
+                return found;
+        }
+return NULL;
 }
 void main()
 {
@@ -159,52 +160,56 @@ case 1:
         break;
         }
 case 2:
-        {
-        struct node*ptr1,*ptr2,*loc;
-        if(root==NULL)
-                {printf("TREE IS EMPTY");
-                break;}
-        printf("ENTER THE NO TO DELETE: ");
-        scanf("%d",&item1);
-        parent=psearch(root,item1);
-        //printf("%d",parent->data);
-        if(parent!=NULL)
-                {
-                if(parent->lc->data==item1)
-                {
-                        if((parent->lc->lc==NULL)&&(parent->lc->rc==NULL))
-                                {
-                                //printf("%d",parent->lc->data);;
-                                free(parent->lc);
-                                parent->lc=NULL;
-                                }
-                else
-                        printf("NODE NOT LEAF NODE");
-                }
-                else
-                {
-                if(parent->rc->data==item1)
-                {
-                if((parent->rc->lc==NULL)&&(parent->rc->rc==NULL))
-                        {
-                                //printf("%d",parent->rc->data);
-                                free(parent->rc);
-                                parent->rc=NULL;
-                        }
-                else
-                        printf("NODE NOT LEAF NODE");
-                }
-                }
-                }
-        else
-                {
-                printf("NODE WITH DATA ITEM DOSN't EXIST");
-                }
-        printf("\nTREE\n");
-        preorder(root);
-        break;
-        }
-
+       {
+                                        struct node*ptr1,*ptr2,*loc;
+                                        if(root==NULL)
+                                        {printf("Tree Is Empty");
+                                                break;}
+                                        printf("Enter the Element To Be Deleted:");
+                                        scanf("%d",&item1);
+                                        parent=psearch(root,item1);
+                                        //printf("%d",parent->data);
+                                        if(parent!=NULL)
+                                        {
+                                                if(parent->lc->data==item1)
+                                                {
+                                                        if((parent->lc->lc==NULL)&&(parent->lc->rc==NULL))
+                                                        {
+                                                                //printf("%d",parent->lc->data);;
+                                                                free(parent->lc);
+                                                                parent->lc=NULL;
+                                                        }
+                                                        else
+                                                            printf("Element is Not A Leaf Node,Deletion not Possible\n");
+                                                }
+                                                else
+                                                {
+                                                        if(parent->rc->data==item1)
+                                                        {
+                                                                if((parent->rc->lc==NULL)&&(parent->rc->rc==NULL))
+                                                                {
+                                                                        //printf("%d",parent->rc->data);
+                                                                        free(parent->rc);
+                                                                        parent->rc=NULL;
+                                                                }
+                                                        else
+                                                            printf("Element is Not a Leaf Node,Deletion not Possible\n");
+                                                        }
+                                                }
+                                        }
+                                        else
+                                        {
+                                        if(root->data==item1)
+                                        {
+                                        printf("Can't Delete the Root Node");
+                                        }
+                                        else
+                                                printf("NOde With Valuew '%d' Doesn't Exist",item1);
+                                        }
+                                        printf("\nTREE\n");
+                                        preorder(root);
+                                        break;
+                                        }
 case 3:
         {
         printf("ENTER THE ELEMNET TO SEARCH:");
