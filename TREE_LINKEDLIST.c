@@ -80,6 +80,8 @@ return NULL;
 struct node* psearch(struct node*ptr,int key)
 {
 struct node*found=NULL;
+if(ptr==root)
+        return NULL;
 if(ptr==NULL)
         return NULL;
 if(ptr->data==key)
@@ -92,25 +94,6 @@ if(ptr->rc->data==key)
   {
     return found;
   }
-}
-struct node* parsearch(struct node*ptr,int key)
-{
-struct node*found1,*par=NULL;
-if(ptr==NULL)
-        return NULL;
-if(ptr->data==key)
-        return NULL;
-if(ptr->lc->data==key)
-        return ptr;
-if(ptr->rc->data==key)
-        return ptr;
-
-found1=psearch(ptr->lc,key);
-if(found1!=NULL)
-        return found1;
-found1=psearch(ptr->rc,key);
-if(found1!=NULL)
-        return found1;
 }
 void main()
 {
