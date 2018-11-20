@@ -13,7 +13,7 @@ void set()
 void buildtree(int i,int item)
 {
 	int newl,newr,ch1,ch2;
-	if(i!=-1)
+	if(i!=0)
 	{
 		a[i]=item;
 		printf("IF NODE LEFT(1/2): ");
