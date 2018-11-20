@@ -133,7 +133,7 @@ switch(cho)
 						if(a[2*s]==-1)
 							{
 								a[2*s]=item1;
-								size++;
+								size=2*size;
 							}
 						else
 							printf("\nDESIRED INSERTION NOT POSSIBLE");
@@ -147,7 +147,7 @@ switch(cho)
 						if(a[2*s+1]==-1)
 							{
 								a[2*s+1]=item2;
-								size++;
+								size=2*size+1;
 							}
 						else
 							printf("\nDESIRED INSERTION NOT POSSIBLE");
